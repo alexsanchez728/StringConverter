@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StringCalculator.App
 {
@@ -11,49 +8,61 @@ namespace StringCalculator.App
         public int Add(string numbers)
         {
             var result = 0;
+            var stringList = ListOfNumbersAsStrings(numbers);
 
-            var numberList = new List<int>();
-
-            var numbersAsStrings = new List<string>();
-
-            if (numbers.Contains(','))
-            {
-                numbersAsStrings = numbers.Split(',').ToList();
-            }
-            else
-            {
-                numbersAsStrings.Add(numbers);
-            }
-
-            if (numbersAsStrings.Count == 0 || numbers == " ")
+            if (stringList.Count == 0 || numbers == " ")
             {
                 return result;
 
             }
-            else if (numbersAsStrings.Count == 1)
+            else if (stringList.Count == 1)
             {
-                foreach (var number in numbersAsStrings)
-                {
-                    numberList.Add(int.Parse(number));
-                }
 
-                result = numberList[0];
+                result = NumbersAsIntList(stringList);
+
                 return result;
 
             }
-            else if (numbersAsStrings.Count == 2)
+            else if (stringList.Count == 2)
             {
-                foreach (var number in numbersAsStrings)
-                {
-                    numberList.Add(int.Parse(number));
-                }
+                result = NumbersAsIntList(stringList);
 
-                return numberList[0] + numberList[1];
+                return result;
             }
             else
             {
                 return 0;
             }
+        }
+
+        private int NumbersAsIntList(List<string> StringList)
+        {
+            var numberList = new List<int>();
+
+            foreach (var number in StringList)
+            {
+                numberList.Add(int.Parse(number));
+            }
+
+            return numberList.Sum();
+        }
+
+
+
+        private List<string> ListOfNumbersAsStrings(string inputString)
+        {
+            var numbersAsStrings = new List<string>();
+
+            if (inputString.Contains(','))
+            {
+                numbersAsStrings = inputString.Split(',').ToList();
+            }
+            else
+            {
+                numbersAsStrings.Add(inputString);
+            }
+
+            return numbersAsStrings;
         }
     }
 }
