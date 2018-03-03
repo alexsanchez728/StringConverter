@@ -7,27 +7,13 @@ namespace StringCalculator.App
     {
         public int Add(string numbers)
         {
-            var result = 0;
             var stringList = ListOfNumbersAsStrings(numbers);
 
-            if (stringList.Count == 0 || numbers == " ")
+
+            if (numbers != " ")
             {
-                return result;
+                return NumbersAsIntList(stringList);
 
-            }
-            else if (stringList.Count == 1)
-            {
-
-                result = NumbersAsIntList(stringList);
-
-                return result;
-
-            }
-            else if (stringList.Count == 2)
-            {
-                result = NumbersAsIntList(stringList);
-
-                return result;
             }
             else
             {
@@ -35,19 +21,7 @@ namespace StringCalculator.App
             }
         }
 
-        private int NumbersAsIntList(List<string> StringList)
-        {
-            var numberList = new List<int>();
-
-            foreach (var number in StringList)
-            {
-                numberList.Add(int.Parse(number));
-            }
-
-            return numberList.Sum();
-        }
-
-
+        //Helper funtcions
 
         private List<string> ListOfNumbersAsStrings(string inputString)
         {
@@ -63,6 +37,32 @@ namespace StringCalculator.App
             }
 
             return numbersAsStrings;
+        }
+
+        private int NumbersAsIntList(List<string> StringList)
+        {
+            var numberList = new List<int>();
+
+            foreach (var number in StringList)
+            {
+                var numberAsInt = int.Parse(number);
+
+                numberList.Add(numberAsInt);
+            }
+            var listWithoutThousands = RemoveNumbersInThousands(numberList);
+            return listWithoutThousands.Sum();
+        }
+
+        private List<int> RemoveNumbersInThousands(List<int> numberList)
+        {
+            var correctedNumberList = new List<int>();
+
+            foreach (var number in numberList)
+            {
+                if (number <= 1000)
+                    correctedNumberList.Add(number);
+            }
+            return correctedNumberList;
         }
     }
 }

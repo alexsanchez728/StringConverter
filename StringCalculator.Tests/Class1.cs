@@ -46,5 +46,25 @@ namespace StringCalculator.Tests
 
             Assert.AreEqual(3, result);
         }
+        [Test]
+        public void String_of_1000_returns_int_1000()
+        {
+            var stringOfNumbers = "1000";
+            var stringConverter = new Converter();
+
+            var result = stringConverter.Add(stringOfNumbers);
+
+            Assert.AreEqual(1000, result);
+        }
+        [Test]
+        public void String_of_1001_2_returns_2()
+        {
+            var stringOfNumbers = "1001,2";
+            var stringConverter = new Converter();
+
+            var result = stringConverter.Add(stringOfNumbers);
+
+            Assert.AreEqual(2, result);
+        }
     }
 }
