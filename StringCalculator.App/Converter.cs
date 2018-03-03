@@ -8,21 +8,47 @@ namespace StringCalculator.App
 {
     public class Converter
     {
-        //Create a simple String calculator with a method int Add(string numbers)
         public int Add(string numbers)
         {
             var result = 0;
 
-            var numberCount = numbers.Length;
+            var numberList = new List<int>();
 
-            if (numberCount == 0 || numbers == " ")
+            var numbersAsStrings = new List<string>();
+
+            if (numbers.Contains(','))
+            {
+                numbersAsStrings = numbers.Split(',').ToList();
+            }
+            else
+            {
+                numbersAsStrings.Add(numbers);
+            }
+
+            if (numbersAsStrings.Count == 0 || numbers == " ")
             {
                 return result;
 
-            } else if (numberCount == 1)
+            }
+            else if (numbersAsStrings.Count == 1)
             {
-                result = int.Parse(numbers);
+                foreach (var number in numbersAsStrings)
+                {
+                    numberList.Add(int.Parse(number));
+                }
+
+                result = numberList[0];
                 return result;
+
+            }
+            else if (numbersAsStrings.Count == 2)
+            {
+                foreach (var number in numbersAsStrings)
+                {
+                    numberList.Add(int.Parse(number));
+                }
+
+                return numberList[0] + numberList[1];
             }
             else
             {

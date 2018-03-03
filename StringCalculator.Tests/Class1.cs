@@ -26,5 +26,25 @@ namespace StringCalculator.Tests
 
             Assert.AreEqual(1, result);
         }
+        [Test]
+        public void String_of_2_returns_int_2()
+        {
+            var stringOfNumbers = "2";
+            var stringConverter = new Converter();
+
+            var result = stringConverter.Add(stringOfNumbers);
+
+            Assert.AreEqual(2, result);
+        }
+        [Test]
+        public void String_of_1_comma_2_returns_int_3()
+        {
+            var stringOfNumbers = "1,2";
+            var stringConverter = new Converter();
+
+            var result = stringConverter.Add(stringOfNumbers);
+
+            Assert.AreEqual(3, result);
+        }
     }
 }
