@@ -12,10 +12,16 @@ namespace StringCalculator.App
         public int Add(string numbers)
         {
             var result = 0;
+
             var numberCount = numbers.Length;
 
-            if (numberCount == 0)
+            if (numberCount == 0 || numbers == " ")
             {
+                return result;
+
+            } else if (numberCount == 1)
+            {
+                result = int.Parse(numbers);
                 return result;
             }
             else
